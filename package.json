@@ -12,6 +12,11 @@
     "echarts": "^5.0.0",
     "vue": "^2.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Geoffwo/echarts-tools.git"
+  },
+  "homepage": "https://gitee.com/Geoffwo/echarts-tools#readme",
   "keywords": [
     "echarts",
     "vue2",
