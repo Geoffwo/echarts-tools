@@ -9,8 +9,7 @@
     "README-zh.md"
   ],
   "peerDependencies": {
-    "echarts": "^5.0.0",
-    "vue": "^2.0.0"
+    "echarts": "^5.0.0"
   },
   "repository": {
     "type": "git",
@@ -24,7 +23,7 @@
     "data-visualization"
   ],
   "scripts": {
-    "build": "npm run es5build && npm run obfuscate",
+    "build": "npm run es5build & npm run obfuscate",
     "es5build": "node ./config/esbuild.mjs",
     "obfuscate": "javascript-obfuscator ./dist --output ./dist --config ./config/obfuscator.config.js"
   },

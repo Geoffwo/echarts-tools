@@ -17,11 +17,11 @@ const babelPlugin = {
 
       // 使用Babel进行深度语法转换（比ESBuild更严格的ES5兼容）
       const result = await transform(code, {
-        filename: args.path,       // 保留文件名信息
-        presets: ['@babel/preset-env']  // 使用env预设智能转换
+        filename: args.path,       // 保留源文件路径信息
+        presets: ['@babel/preset-env']  // 使用env预设智能转换ES6+语法
       });
 
-      return { contents: result.code }; // 返回转换后代码
+      return { contents: result.code }; // 返回转换后的ES5代码
     });
   }
 };
@@ -32,11 +32,13 @@ esbuild.build({
   bundle: true,         // 打包依赖 - 将依赖树合并为单个文件
   outdir: 'dist',       // 输出目录 - 生成到dist文件夹
   target: 'es5',        // 目标环境 - 兼容IE11等旧浏览器
-  format: 'cjs',       // ▲ 输出格式改为CommonJS - 解决模块导出兼容性问题 ▲
+  // format: 'cjs',       // ▲ 输出格式改为CommonJS - 解决模块导出兼容性问题（Node.js模块系统） ▲ 只能兼容vue2
+  format: 'iife',        // 改为立即执行函数表达式 兼容vue2、html
+  globalName: 'echartsTools',      // 定义全局变量名称
   minify: false,        // 压缩代码 - 测试阶段关闭，正式发布可启用
   sourcemap: false,     // SourceMap - 调试时建议开启
   loader: {
-    '.js': 'jsx' // ▲ 强制JSX解析器 - 处理特殊JS语法兼容 ▲
+    '.js': 'jsx' // ▲ 强制JSX解析器 - 处理特殊JS语法兼容（处理React语法） ▲
   },
   plugins: [babelPlugin] // 加载插件 - 应用Babel转换
 }).catch(() => process.exit(1));  // 异常处理 - 构建失败时终止进程

@@ -1,6 +1,6 @@
 # echarts-tools
 
-简化 ECharts 在 Vue2 中使用的工具库（基于 echarts 5+）
+简化 ECharts 在 Vue2、html 中使用的工具库（基于 echarts 5+）
 
 ## 安装
 ```bash
@@ -36,4 +36,4 @@ printDoc();
 
 ## 代码保护说明
 
-本项目通过代码混淆技术保护核心逻辑，原始源代码可在 /src 查看。混淆行为符合 ISC 许可证条款。
+本项目通过代码混淆技术保护核心逻辑，原始源代码可在 https://github.com/Geoffwo/echarts-tools.git 查看。混淆行为符合 ISC 许可证条款。

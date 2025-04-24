@@ -12,7 +12,7 @@ module.exports = {
   // ================= 辅助优化配置 =================
   compact: false,                 // 压缩代码（不影响符号）
   identifierNamesGenerator: 'mangled', // 变量名混淆为 a,b,c
-  renameGlobals: false,          // 保留全局变量（确保 Vue 兼容性）
+  renameGlobals: true,          // 保留全局变量（确保 Vue 兼容性）
   ignoreRequireImports: true,    // 保留模块导入名称（如 import * as echarts）
   controlFlowFlattening: false,      // 关闭控制流平坦化
   deadCodeInjection: true,          // 关闭僵尸代码注入
@@ -26,6 +26,7 @@ module.exports = {
     '^printDoc$',
     '^registerEventHandler$',
     '^registerSimpleEventHandler$',
-    '^importEcharts$' // 新增
+    '^importEcharts$',
+    'EchartsTools' // 保留全局变量名
   ]
 }

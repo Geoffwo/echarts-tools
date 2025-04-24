@@ -1,6 +1,6 @@
 # echarts-tools
 
-A utility library simplifying ECharts usage in Vue2 (based on echarts 5+)
+A utility library simplifying ECharts usage in Vue2、html (based on echarts 5+)
 
 ## Installation
 ```bash
@@ -36,4 +36,4 @@ Use `printDoc()` to view the full list of strategies, or refer to source code co
 
 ## Code Protection Notice
 
-This project protects core logic through code obfuscation techniques. The original source code can be viewed in the /src directory. Obfuscation implementation is compliant with the ISC License terms.
+This project protects core logic through code obfuscation techniques. The original source code can be viewed in the https://github.com/Geoffwo/echarts-tools.git directory. Obfuscation implementation is compliant with the ISC License terms.
