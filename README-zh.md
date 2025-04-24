@@ -12,6 +12,10 @@ npm install echarts-tools echarts --save
 echarts-tools/
 ├── src/                           # 源代码目录 未开放
 ├── dist/                          # 输出目录（混淆后的代码）
+│   ├── cjs/             # Vue2
+│   │   └── index.js     
+│   └── iife/            # html
+│       └── index.js                        
 └── package.json
 ```
 

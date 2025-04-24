@@ -26,19 +26,32 @@ const babelPlugin = {
   }
 };
 
-/**************************** 执行构建任务 ****************************/
-esbuild.build({
+/**************************** 双格式构建逻辑 ****************************/
+// 通用基础配置
+const baseConfig = {
   entryPoints: ['src/index.js'],  // 入口文件 - 从组件库主入口开始打包
   bundle: true,         // 打包依赖 - 将依赖树合并为单个文件
-  outdir: 'dist',       // 输出目录 - 生成到dist文件夹
   target: 'es5',        // 目标环境 - 兼容IE11等旧浏览器
-  // format: 'cjs',       // ▲ 输出格式改为CommonJS - 解决模块导出兼容性问题（Node.js模块系统） ▲ 只能兼容vue2
-  format: 'iife',        // 改为立即执行函数表达式 兼容vue2、html
-  globalName: 'echartsTools',      // 定义全局变量名称
   minify: false,        // 压缩代码 - 测试阶段关闭，正式发布可启用
   sourcemap: false,     // SourceMap - 调试时建议开启
-  loader: {
-    '.js': 'jsx' // ▲ 强制JSX解析器 - 处理特殊JS语法兼容（处理React语法） ▲
-  },
-  plugins: [babelPlugin] // 加载插件 - 应用Babel转换
-}).catch(() => process.exit(1));  // 异常处理 - 构建失败时终止进程
+  plugins: [babelPlugin], // 加载插件 - 应用Babel转换
+  loader: { '.js': 'jsx' }// ▲ 强制JSX解析器 - 处理特殊JS语法兼容（处理React语法） ▲
+};
+
+// 并行构建两种格式
+Promise.all([
+  // IIFE 格式（HTML 直接使用）
+  esbuild.build({
+    ...baseConfig,
+    format: 'iife',// 改为立即执行函数表达式 兼容html
+    globalName: 'echartsTools', // 定义全局变量名称
+    outdir: 'dist/iife'         // 输出到独立目录
+  }),
+
+  // CJS 格式（Vue2 项目）
+  esbuild.build({
+    ...baseConfig,
+    format: 'cjs', // ▲ 输出格式改为CommonJS - 解决模块导出兼容性问题（Node.js模块系统） ▲ 兼容vue2
+    outdir: 'dist/cjs'          // 输出到独立目录
+  })
+]).catch(() => process.exit(1));

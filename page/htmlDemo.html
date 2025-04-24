@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>ECharts Tools 演示</title>
+  <!-- 1. 引入 ECharts 核心库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <!-- 2. 引入打包后的 echarts-tools -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts-tools@1.1.7/dist/index.js"></script>
+  <style>
+    #main {
+      width: 600px;
+      height: 400px;
+      /*background: #2c3e50; !* 深色背景 *!*/
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+<!-- 3. 图表容器 -->
+<div id="main"></div>
+
+<script>
+
+  const ets = echartsTools
+
+  // 4. 初始化
+  ets.importEcharts(echarts);
+
+  // 5. 定义图表配置
+  const option = {
+    title: {
+      text: '销量趋势图',
+      textStyle: {
+        color: '#000' // ✅ 正确设置标题颜色
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    },
+    yAxis: { type: 'value' },
+    series: [{
+      data: [820, 932, 901, 934, 1290, 1330],
+      type: 'line'
+    }]
+  };
+
+  // 6. 创建图表实例
+  const myChart = ets.createBasicChartInstance({
+    dom: document.getElementById('main'),
+    option: option,
+    events: {
+      click: {
+        handler: (params, chart, result) => {
+          if (result) {
+            alert(`点击了第 ${result.xIndex} 项: ${option.xAxis.data[result.xIndex]}`);
+          }
+        },
+        strategy: 'xIndex' // 使用内置策略获取点击索引
+      }
+    }
+  });
+
+  // 7. 窗口缩放时自适应
+  window.addEventListener('resize', () => {
+    myChart.resize();
+  });
+</script>
+</body>
+</html>

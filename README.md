@@ -12,6 +12,10 @@ npm install echarts-tools echarts --save
 echarts-tools/
 ├── src/                           # Source code directory (not open)
 ├── dist/                          # Output directory (obfuscated code)
+│   ├── cjs/             # Vue2
+│   │   └── index.js     
+│   └── iife/            # html
+│       └── index.js                               
 └── package.json
 ```
 
