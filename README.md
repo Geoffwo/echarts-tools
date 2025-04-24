@@ -1,43 +1,112 @@
-# echarts-tools
+# echarts-tools Basic Guide
 
-A utility library simplifying ECharts usage in Vue2、html (based on echarts 5+)
+## 🚀 Quick Start
 
-## Installation
+### Environment Setup
+1. Install Node.js 14.18+ 
+   - [Official Download](https://nodejs.org/)
+   - Verify installation:
+     ```bash
+     node -v  # Should display v14.18 or higher
+     npm -v   # Should display 6.x+
+     ```
+
+### Clone Project
 ```bash
-npm install echarts-tools echarts --save
+git clone https://github.com/Geoffwo/echarts-tools.git
+Or use China mirror:
+git clone https://gitee.com/Geoffwo/echarts-tools.git
+cd echarts-tools
 ```
 
-## Project Structure
+### Install Dependencies
+```bash
+npm install
+```
+
+### Build Project
+```bash
+npm run build
+```
+After building, you'll get:
+```
+dist/
+├── cjs/    # For Vue2 projects
+└── iife/   # For direct HTML usage
+```
+
+---
+
+## 📂 Directory Structure
 ```
 echarts-tools/
-├── src/                           # Source code directory (not open)
-├── dist/                          # Output directory (obfuscated code)
-│   ├── cjs/             # Vue2
-│   │   └── index.js     
-│   └── iife/            # html
-│       └── index.js                               
-└── package.json
+├── dist/           # Build output (DO NOT modify manually)
+├── src/            # Source code (unobfuscated)
+├── page/           # Code examples
+├── config/         # Build configurations
+│   ├── esbuild.mjs          # ESBuild config
+│   └── obfuscator.config.js # Obfuscation config
+├── package.json    # Project config
+├── README.md       # Documentation (English)
+└── README-zh.md    # Documentation (Chinese)
 ```
 
-## View Documentation
+---
 
+## 🛠️ Usage
+
+### For Vue2 Projects
+1. Install dependencies
+   ```bash
+   npm install echarts-tools echarts@5 --save
+   ```
+
+2. Component usage example:  
+   [vue2Demo.vue](page/vue2Demo.vue)
+
+### For HTML Direct Usage
+Example:  
+[htmlDemo.html](page/htmlDemo.html)
+
+---
+
+## 🔧 Common Commands
+
+| Command             | Description                      |
+|----------------------|----------------------------------|
+| `npm install`        | Install development dependencies |
+| `npm run build`      | Build production version (with obfuscation) |
+| `npm run es5build`  | Build without obfuscation (for debugging) |
+
+---
+
+## ⚠️ Important Notes
+1. **echarts Peer Dependency**  
+   This library requires echarts 5+:
+   ```bash
+   npm install echarts@5 --save
+   ```
+
+2. **Code Protection**  
+   Files in `dist/` are obfuscated:
+    - Use `npm run es5build` for unobfuscated debug builds
+    - Obfuscation config: `config/obfuscator.config.js`
+
+3. **Browser Compatibility**  
+   IIFE version requirements:
+   ```html
+   <!-- Load echarts first -->
+   <script src="echarts.min.js"></script>
+   <!-- Then load this library -->
+   <script src="echarts-tools.js"></script>
+   ```
+
+---
+
+## 📜 View Documentation
+Access API docs programmatically:
 ```javascript
 import { printDoc } from 'echarts-tools';
-
-// View documentation
-printDoc();
+printDoc(); // Prints all available methods and configs
 ```
 
-## Features
-
-• Supports shortcut event strategies (e.g., `xIndex`)
-• Provides factory functions for automatic chart generation
-• Built-in event handling strategy system
-
-## Strategy Documentation
-
-Use `printDoc()` to view the full list of strategies, or refer to source code comments.
-
-## Code Protection Notice
-
-This project protects core logic through code obfuscation techniques. The original source code can be viewed in the https://github.com/Geoffwo/echarts-tools.git directory. Obfuscation implementation is compliant with the ISC License terms.

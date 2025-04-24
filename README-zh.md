@@ -1,43 +1,111 @@
-# echarts-tools
+# echarts-tools 基础指南
 
-简化 ECharts 在 Vue2、html 中使用的工具库（基于 echarts 5+）
+## 🚀 快速开始
 
-## 安装
+### 环境准备
+1. 安装 Node.js 14.18+ 
+   - [官网下载](https://nodejs.org/)
+   - 验证安装：
+   
 ```bash
-npm install echarts-tools echarts --save
+node -v  # 应显示 v14.18 或更高
+npm -v   # 应显示 6.x+
 ```
 
-## 项目结构
+### 下载项目
+```bash
+git clone https://github.com/Geoffwo/echarts-tools.git
+git clone https://gitee.com/Geoffwo/echarts-tools.git
+cd echarts-tools
+```
+
+### 安装依赖
+```bash
+npm install
+```
+
+### 编译项目
+```bash
+npm run build
+```
+构建完成后生成：
+```
+dist/
+├── cjs/    # Vue2 项目使用的模块
+└── iife/   # HTML 直接引用的脚本
+```
+
+---
+
+## 📂 目录结构
 ```
 echarts-tools/
-├── src/                           # 源代码目录 未开放
-├── dist/                          # 输出目录（混淆后的代码）
-│   ├── cjs/             # Vue2
-│   │   └── index.js     
-│   └── iife/            # html
-│       └── index.js                        
-└── package.json
+├── dist/           # 构建输出目录（不要手动修改）
+├── src/            # 未混淆的源代码
+├── page/           # 代码示例
+├── config/         # 构建配置文件
+│   ├── esbuild.mjs          # ESBuild 配置
+│   └── obfuscator.config.js # 混淆配置
+├── package.json    # 项目配置
+├── README.md    # 项目文档
+└── README-zh.md       # 项目文档
 ```
 
-## 查看文档
+---
 
+## 🛠️ 使用方法
+
+### Vue2 项目
+1. 安装依赖
+   ```bash
+   npm install echarts-tools echarts@5 --save
+   ```
+
+2. 组件中使用
+   [vue2Demo.vue](page/vue2Demo.vue)
+
+### HTML 直接使用
+[htmlDemo.html](page/htmlDemo.html)
+
+---
+
+## 🔧 常用命令
+
+| 命令                  | 作用                          |
+|-----------------------|------------------------------|
+| `npm install`         | 安装开发依赖                  |
+| `npm run build`       | 编译生产版本（含代码混淆）    |
+| `npm run es5build`   | 仅编译不混淆（调试用）        |
+
+---
+
+## ⚠️ 注意事项
+1. **必须安装 echarts**  
+   项目本身不包含 echarts，需单独安装：
+   ```bash
+   npm install echarts@5 --save
+   ```
+
+2. **代码保护机制**  
+   `dist/` 目录中的代码经过混淆：
+    - 调试请使用 `npm run es5build` 生成的未混淆版本
+    - 混淆配置见 `config/obfuscator.config.js`
+
+3. **浏览器兼容性**  
+   IIFE 版本需配合 echarts 5.x 使用，确保引入顺序：
+   ```html
+   <!-- 先引入 echarts -->
+   <script src="echarts.min.js"></script>
+   <!-- 再引入本库 -->
+   <script src="echarts-tools.js"></script>
+   ```
+
+---
+
+## 📜 查看文档
+在代码中查看 API 文档：
 ```javascript
 import { printDoc } from 'echarts-tools';
-
-// 查看文档
-printDoc();
+printDoc(); // 打印所有可用方法和配置
 ```
 
-## 特性
-
-- 支持快捷事件策略（如 `xIndex`）
-- 提供工厂函数自动生成图表
-- 内置事件处理策略系统
-
-## 策略文档
-
-通过 `printDoc()` 查看完整策略列表，或查看源码注释。
-
-## 代码保护说明
-
-本项目通过代码混淆技术保护核心逻辑，原始源代码可在 https://github.com/Geoffwo/echarts-tools.git 查看。混淆行为符合 ISC 许可证条款。
