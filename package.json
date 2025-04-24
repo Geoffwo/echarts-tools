@@ -4,6 +4,7 @@
   "description": "Simplified ECharts utilities for Vue2",
   "main": "dist/cjs/index.js",
   "files": [
+    "page",
     "dist",
     "README.md",
     "README-zh.md"
