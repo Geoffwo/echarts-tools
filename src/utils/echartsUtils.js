@@ -1,4 +1,4 @@
-/*! @license echarts-tools
+/*! @license echarts-tools echartsUtils.js
  * Copyright (c) 2025 geoffwo
  * This source code is licensed under the ISC license
  */

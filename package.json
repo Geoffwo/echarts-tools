@@ -28,7 +28,7 @@
   "scripts": {
     "build": "npm run es5build & npm run obfuscate",
     "es5build": "node ./config/esbuild.mjs",
-    "obfuscate": "npm run obfuscate:iife && npm run obfuscate:cjs",
+    "obfuscate": "npm run obfuscate:iife & npm run obfuscate:cjs",
     "obfuscate:iife": "javascript-obfuscator ./dist/iife --output ./dist/iife --config ./config/obfuscator.config.js",
     "obfuscate:cjs": "javascript-obfuscator ./dist/cjs --output ./dist/cjs --config ./config/obfuscator.config.js"
   },

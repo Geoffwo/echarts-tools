@@ -35,7 +35,8 @@ const baseConfig = {
   minify: false,        // 压缩代码 - 测试阶段关闭，正式发布可启用
   sourcemap: false,     // SourceMap - 调试时建议开启
   plugins: [babelPlugin], // 加载插件 - 应用Babel转换
-  loader: { '.js': 'jsx' }// ▲ 强制JSX解析器 - 处理特殊JS语法兼容（处理React语法） ▲
+  loader: { '.js': 'jsx' },// ▲ 强制JSX解析器 - 处理特殊JS语法兼容（处理React语法） ▲
+  legalComments: 'linked'
 };
 
 // 并行构建两种格式
