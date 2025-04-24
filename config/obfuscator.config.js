@@ -27,6 +27,6 @@ module.exports = {
     '^registerEventHandler$',
     '^registerSimpleEventHandler$',
     '^importEcharts$',
-    'EchartsTools' // 保留全局变量名
+    '^echartsTools$' // 保留全局变量名
   ]
 }
