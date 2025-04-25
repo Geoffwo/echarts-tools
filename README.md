@@ -110,3 +110,28 @@ import { printDoc } from 'echarts-tools';
 printDoc(); // Prints all available methods and configs
 ```
 
+## 💖  Project Support
+
+If this project helps you, consider supporting maintenance:
+
+• 🚀 Any amount - General support
+
+• ☕ 5 CNY - Buy me a coffee
+
+• 📚 10 CNY - Documentation improvements
+
+
+| Alipay                             | WeChat Pay                          |
+|----------------------------------|-------------------------------------|
+| ![alipay](assets/alipay-qr.jpg)  | ![wechat](assets/wechat-qr.jpg)     |
+
+### Donation Terms
+1. All donations are voluntary gifts
+2. No services or obligations are implied
+3. No contractual relationship established
+4. Minors must obtain guardian consent
+
+## Technical Support
+
+Contact: <wangguoxv@163.com>
+
