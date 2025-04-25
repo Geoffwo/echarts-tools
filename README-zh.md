@@ -93,7 +93,7 @@ echarts-tools/
 
 3. **浏览器兼容性**  
    IIFE 版本需配合 echarts 5.x 使用，确保引入顺序：
-   ```html
+   ```
    <!-- 先引入 echarts -->
    <script src="echarts.min.js"></script>
    <!-- 再引入本库 -->
