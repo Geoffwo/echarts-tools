@@ -94,7 +94,7 @@ Example:
 
 3. **Browser Compatibility**  
    IIFE version requirements:
-   ```html
+   ```
    <!-- Load echarts first -->
    <script src="echarts.min.js"></script>
    <!-- Then load this library -->
