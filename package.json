@@ -1,5 +1,4 @@
-{
-  "name": "echarts-tools",
+{"name": "echarts-tools",
   "version": "1.1.10",
   "description": "Simplified ECharts utilities for Vue2 and HTML",
   "main": "dist/cjs/index.js",
@@ -31,7 +30,13 @@
     "es5build": "node ./config/esbuild.mjs",
     "obfuscate": "npm run obfuscate:iife & npm run obfuscate:cjs",
     "obfuscate:iife": "javascript-obfuscator ./dist/iife --output ./dist/iife --config ./config/obfuscator.config.js",
-    "obfuscate:cjs": "javascript-obfuscator ./dist/cjs --output ./dist/cjs --config ./config/obfuscator.config.js"
+    "obfuscate:cjs": "javascript-obfuscator ./dist/cjs --output ./dist/cjs --config ./config/obfuscator.config.js",
+    "npmjs": "npm config set registry https://registry.npmjs.org/",
+    "mirror": "npm config set registry https://registry.npmmirror.com/",
+    "toLogin": "npm run npmjs & npm login",
+    "patch": "npm version patch",
+    "toPublish": "npm publish",
+    "toUnpublish": "npm unpublish echarts-tools@1.1.0 --force"
   },
   "author": "geoffwo",
   "license": "ISC",
