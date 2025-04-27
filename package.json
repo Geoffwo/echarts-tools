@@ -31,12 +31,13 @@
     "obfuscate": "npm run obfuscate:iife & npm run obfuscate:cjs",
     "obfuscate:iife": "javascript-obfuscator ./dist/iife --output ./dist/iife --config ./config/obfuscator.config.js",
     "obfuscate:cjs": "javascript-obfuscator ./dist/cjs --output ./dist/cjs --config ./config/obfuscator.config.js",
-    "npmjs": "npm config set registry https://registry.npmjs.org/",
-    "mirror": "npm config set registry https://registry.npmmirror.com/",
-    "toLogin": "npm run npmjs & npm login",
-    "patch": "npm version patch",
-    "toPublish": "npm publish",
-    "toUnpublish": "npm unpublish echarts-tools@1.1.0 --force"
+
+    "registry:npm": "npm config set registry https://registry.npmjs.org/",
+    "registry:mirror": "npm config set registry https://registry.npmmirror.com/",
+    "login:npm": "npm run registry:npm & npm login",
+    "version:patch": "npm version patch",
+    "publish:all": "npm publish",
+    "unpublish:force": "npm unpublish echarts-tools@1.1.0-bate0.0.2 --force"
   },
   "author": "geoffwo",
   "license": "ISC",
