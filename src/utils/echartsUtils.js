@@ -62,17 +62,18 @@ function createBasicChartInstance(config) {
  */
 function drawBasicChartFactory(config, context) {
   //只解构出需要的部分
-  const {data=[],id='',optionFuc=()=>{} } = config
+  const {data=[],id='',optionFuc=()=>{},option={} } = config
+
 
   const dom = document.getElementById(id);
   if (!dom) throw new Error(`DOM #${id} not found`);
 
-  const option = optionFuc(data, context);
-  if (!option || typeof option !== 'object') {
+  const finalOption = optionFuc(data, context) || option;
+  if (!finalOption) {
     throw new Error('Invalid ECharts option');
   }
 
-  return createBasicChartInstance({...config,dom, option });
+  return createBasicChartInstance({...config,dom, option:finalOption });
 }
 
 // -------------------------- 事件处理工具函数 --------------------------
@@ -239,13 +240,19 @@ drawBasicChartFactory({
       strategy: 'xIndex'
     }
   }
+},this)`,
+    sampleMode: `
+drawBasicChartFactory({
+  id: 'main',
+  option:getOptions01(data,_this)
 },this)`
   };
 
   console.log(`\n${docContent.title}:`);
-  console.log(`\n1. 快捷模式（字符串语法）:\n   ${docContent.quickMode}`);
-  console.log(`\n2. 原始模式（函数语法）:\n   ${docContent.rawMode}`);
-  console.log(`\n3. 混合模式（对象语法）:\n   ${docContent.hybridMode}`);
+  console.log(`\n1. 快捷模式（事件:字符串语法）:\n   ${docContent.quickMode}`);
+  console.log(`\n2. 原始模式（事件:函数语法）:\n   ${docContent.rawMode}`);
+  console.log(`\n3. 混合模式（事件:对象语法）:\n   ${docContent.hybridMode}`);
+  console.log(`\n4. 简单模式（配置:直接接受option）:\n   ${docContent.sampleMode}`);
 };//print
 
 /**
