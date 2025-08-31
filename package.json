@@ -1,6 +1,6 @@
 {
   "name": "echarts-tools",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Simplified ECharts utilities for Vue2 and HTML",
   "main": "dist/cjs/index.js",
   "files": [
