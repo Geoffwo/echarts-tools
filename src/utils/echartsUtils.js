@@ -43,11 +43,6 @@ function createBasicChartInstance(config) {
       });
     }
 
-    // 增加销毁方法
-    myChart.dispose = () => {
-      echarts.dispose(myChart); // 销毁图表
-    };
-
     return myChart;
   } catch (error) {
     console.error('ECharts init failed:', error);
