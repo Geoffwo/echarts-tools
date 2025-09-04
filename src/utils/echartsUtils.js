@@ -20,7 +20,8 @@ function createBasicChartInstance(config) {
   const { dom, option = {}, events = null, notMerge = true, theme = null, opts = {renderer: 'canvas'} } = config || {};
 
   if (!(dom instanceof HTMLElement)) {
-    throw new Error('Invalid DOM element')
+    console.warn(`Invalid DOM element`)
+    return; // 中断函数执行
   }
 
   try {
@@ -61,11 +62,15 @@ function drawBasicChartFactory(config, context) {
 
 
   const dom = document.getElementById(id);
-  if (!dom) throw new Error(`DOM #${id} not found`);
+  if (!dom) {
+    console.warn(`DOM #${id} not found`)
+    return; // 中断函数执行
+  }
 
   const finalOption = optionFuc(data, context) || option;
   if (!finalOption) {
-    throw new Error('Invalid ECharts option');
+    console.warn('Invalid ECharts option')
+    return; // 中断函数执行
   }
 
   return createBasicChartInstance({...config,dom, option:finalOption });
