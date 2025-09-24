@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>ECharts Tools 演示</title>
   <!-- 1. 引入 ECharts 核心库 -->
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
   <!-- 2. 引入打包后的 echarts-tools -->
 <!--  <script src="https://cdn.jsdelivr.net/npm/echarts-tools@1.1.10/dist/iife/index.js"></script>-->
   <script src="../dist/iife/index.js"></script>
@@ -48,20 +48,35 @@
   };
 
   // 6. 创建图表实例
-  const myChart = ets.createBasicChartInstance({
-    dom: document.getElementById('main'),
-    option: option,
-    events: {
-      click: {
-        handler: (params, chart, result) => {
-          if (result) {
-            alert(`点击了第 ${result.xIndex} 项: ${option.xAxis.data[result.xIndex]}`);
+  // const myChart = ets.createBasicChartInstance({
+  //   dom: document.getElementById('main'),
+  //   option: option,
+  //   events: {
+  //     click: {
+  //       handler: (params, chart, result) => {
+  //         if (result) {
+  //           alert(`点击了第 ${result.xIndex} 项: ${option.xAxis.data[result.xIndex]}`);
+  //         }
+  //       },
+  //       strategy: 'xIndex' // 使用内置策略获取点击索引
+  //     }
+  //   }
+  // });
+
+  // 6. 创建图表实例
+  const myChart = ets.drawBasicChartFactory({//进一步封装
+      id:'main',
+      option:option,//this.getOptions01(data,this),
+      events:{
+          click:{
+              handler:(params, chart, result) => {
+                  this.eventEcharts(result)
+              },
+              strategy: 'xIndex',
+              handlerType:'echarts'//zrender
           }
-        },
-        strategy: 'xIndex' // 使用内置策略获取点击索引
       }
-    }
-  });
+  },'default')//default为import的版本号
 
   // 7. 窗口缩放时自适应
   window.addEventListener('resize', () => {

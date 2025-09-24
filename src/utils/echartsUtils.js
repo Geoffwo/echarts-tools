@@ -4,18 +4,49 @@
  */
 import {strategyUtils} from './strategyUtils.js'
 const handlerStrategies = strategyUtils.getAll()
-let echarts = null
-// -------------------------- Echarts生成函数 --------------------------
-function importEcharts(echart){
+
+// 维护ECharts版本映射表，支持多版本共存
+const echartsVersions = new Map();
+// 默认版本标识
+let defaultVersion = 'default';
+// -------------------------- Echarts版本管理 --------------------------
+/**
+ * 注册ECharts版本
+ * @param {Object} echart - ECharts库实例
+ * @param {string} version - 版本标识，默认为'default'
+ * @param {boolean} setAsDefault - 是否设为默认版本
+ */
+function importEcharts(echart, version = defaultVersion, setAsDefault = false) {
   if (echart) {
-    echarts = echart
+    echartsVersions.set(version, echart);
+    if (setAsDefault || echartsVersions.size === 1) {
+      defaultVersion = version;
+    }
   }
+}
+
+/**
+ * 获取指定版本的ECharts
+ * @param {string} version - 版本标识
+ * @returns {Object} ECharts实例
+ */
+function getEcharts(version = defaultVersion) {
+  const echart = echartsVersions.get(version);
+  if (!echart) {
+    console.warn(`ECharts version '${version}' is not registered`);
+  }
+  return echart;
 }
 /**
  * 实例化Echarts
  * @param {Object} config
+ * @param {string} version - 要使用的ECharts版本标识
  */
-function createBasicChartInstance(config) {
+function createBasicChartInstance(config, version = defaultVersion) {
+  // 获取指定版本的ECharts
+  const echarts = getEcharts(version);
+  if (!echarts) return null;
+
   //只解构出需要的部分
   const { dom, option = {}, events = null, notMerge = true, theme = null, opts = {renderer: 'canvas'} } = config || {};
 
@@ -44,6 +75,9 @@ function createBasicChartInstance(config) {
       });
     }
 
+    // 存储当前使用的版本信息，便于后续操作
+    myChart.__echartsVersion = version;
+
     return myChart;
   } catch (error) {
     console.error('ECharts init failed:', error);
@@ -54,11 +88,11 @@ function createBasicChartInstance(config) {
 /**
  * 创建图表实例（带类型校验） Echarts工厂
  * @param {Object} config
- * @param {Object} context - 组件上下文
+ * @param {String} version - 要使用的ECharts版本标识
  */
-function drawBasicChartFactory(config, context) {
+function drawBasicChartFactory(config, version= defaultVersion) {
   //只解构出需要的部分
-  const {data=[],id='',optionFuc=()=>{},option={} } = config
+  const {id='',option={} } = config
 
 
   const dom = document.getElementById(id);
@@ -67,13 +101,12 @@ function drawBasicChartFactory(config, context) {
     return; // 中断函数执行
   }
 
-  const finalOption = optionFuc(data, context) || option;
-  if (!finalOption) {
+  if (!option) {
     console.warn('Invalid ECharts option')
     return; // 中断函数执行
   }
 
-  return createBasicChartInstance({...config,dom, option:finalOption });
+  return createBasicChartInstance({...config,dom,option},version);
 }
 
 // -------------------------- 事件处理工具函数 --------------------------

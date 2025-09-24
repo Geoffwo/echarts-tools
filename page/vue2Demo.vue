@@ -42,21 +42,22 @@ export default {
     },
     getEcharts1(){
       //模拟data
+      const data= {
+        series: [150, 230, 224, 218, 135, 147, 260]
+      }
       this.ehartsObj = drawBasicChartFactory({//进一步封装
-        data: {
-          series: [150, 230, 224, 218, 135, 147, 260]
-        },
         id:'gw-echarts1',
-        optionFuc:this.getOptions01,
+        option:this.getOptions01(data,this),
         events:{
           click:{
             handler:(params, chart, result) => {
               this.eventEcharts(result)
             },
-            strategy: 'xIndex'
+            strategy: 'xIndex',
+            // handlerType:'echarts'//zrender
           }
         }
-      },this)
+      },'default')
     }
   },
   mounted() {
