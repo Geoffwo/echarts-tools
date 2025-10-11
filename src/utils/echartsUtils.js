@@ -68,7 +68,7 @@ function createBasicChartInstance(config, version = defaultVersion) {
         const { handler, strategy, config, handlerType } = parseEventConfig(eventConfig);
 
         // 2. 生成事件处理器
-        const wrappedHandler = createEventHandler({ handler, strategy, config });
+        const wrappedHandler = createEventHandler({ handler, strategy, option, config });
 
         // 3. 绑定到对应事件系统
         bindChartEvent(myChart, eventName, wrappedHandler, handlerType);
@@ -147,13 +147,13 @@ function parseEventConfig(eventConfig) {
 /**
 * 创建事件处理器闭包
 */
-function createEventHandler({ handler, strategy, config }) {
+function createEventHandler({ handler, strategy, option, config }) {
   return (params, myChart) => {
     try {
       let strategyResult;
       // 执行策略逻辑
       if (strategy && handlerStrategies[strategy]) {
-        strategyResult = handlerStrategies[strategy](params, myChart, config);
+        strategyResult = handlerStrategies[strategy](params, myChart, option, config);
       }
 
       // 分发处理逻辑

@@ -3,9 +3,8 @@
  * This source code is licensed under the ISC license
  */
 import { registerSimpleEventHandler } from '../utils/strategyUtils.js';
-const xIndex = (params, myChart,option={},config={}) => {
-    // config,给自定义策略的预留位置
-    // const {seriesIndex=0,finder='grid'} = config
+const pie3D = (params, myChart, option={},config={}) => {
+
 
     const pointInPixel = [params.offsetX, params.offsetY];//获取点位信息
 
@@ -21,4 +20,4 @@ const xIndex = (params, myChart,option={},config={}) => {
 }
 
 // 注册策略并添加元数据
-registerSimpleEventHandler('xIndex', xIndex, '从点击坐标提取数据项的 x 轴索引，适用于笛卡尔坐标系（如折线图、柱状图）');
+registerSimpleEventHandler('pie3D', pie3D, '3D饼图、环状图默认样式处理');
