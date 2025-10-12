@@ -30,6 +30,8 @@ const pie3dOut = (params, chart, config={}) => {
 
     // 3.3 重新渲染图表
     chart.setOption(chartOption);
+
+    return '3D饼图自动恢复'
 }
 
 // 注册策略并添加元数据

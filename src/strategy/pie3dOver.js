@@ -47,6 +47,8 @@ const pie3dOver = (params, chart, config={}) => {
 
     // 2.4 重新渲染图表
     chart.setOption(chartOption);
+
+    return '3D饼图自动放大'
 }
 
 // 注册策略并添加元数据
