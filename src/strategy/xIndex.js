@@ -3,7 +3,7 @@
  * This source code is licensed under the ISC license
  */
 import { registerSimpleEventHandler } from '../utils/strategyUtils.js';
-const xIndex = (params, myChart,option={},config={}) => {
+const xIndex = (params, myChart,config={}) => {
     // config,给自定义策略的预留位置
     // const {seriesIndex=0,finder='grid'} = config
 

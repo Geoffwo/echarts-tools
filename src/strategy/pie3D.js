@@ -3,8 +3,8 @@
  * This source code is licensed under the ISC license
  */
 import { registerSimpleEventHandler } from '../utils/strategyUtils.js';
-const pie3D = (params, myChart, option={},config={}) => {
-
+const pie3D = (params, myChart,config={}) => {
+    //myChart.getOption()
 
     const pointInPixel = [params.offsetX, params.offsetY];//获取点位信息
 
