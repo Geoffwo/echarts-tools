@@ -70,13 +70,13 @@
       events:{
           click:{
               handler:(params, chart, result) => {
-                  this.eventEcharts(result)
+                  alert(`点击了第 ${result.xIndex} 项: ${option.xAxis.data[result.xIndex]}`);
               },
               strategy: 'xIndex',
-              handlerType:'echarts'//zrender
+              // handlerType:'echarts'//zrender
           }
       }
-  },'default')//default为import的版本号
+  })//default为import的版本号
 
   // 7. 窗口缩放时自适应
   window.addEventListener('resize', () => {
